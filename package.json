@@ -1,0 +1,27 @@
+{
+  "name": "quiz-preview-prototype",
+  "version": "1.0.0",
+  "description": "Prototype for quiz-manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup --config",
+    "watch": "rollup -c --watch"
+  },
+  "keywords": [
+    "prototype",
+    "quiz",
+    "quiz-previewer"
+  ],
+  "author": "Chessurisme",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "rollup": "^4.28.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-delete": "^2.1.0"
+  },
+  "dependencies": {
+    "lucide": "^0.462.0"
+  }
+}
