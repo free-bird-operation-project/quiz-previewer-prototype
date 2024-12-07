@@ -464,6 +464,38 @@
                         "sizes": "1024x1024"
                 }
         ],
+        "screenshots": [
+                {
+                        "src": "assets/screenshots/1.png",
+                        "sizes": "549x1040",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                },
+                {
+                        "src": "assets/screenshots/2.png",
+                        "sizes": "549x1040",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                },
+                {
+                        "src": "assets/screenshots/3.png",
+                        "sizes": "549x1040",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                },
+                {
+                        "src": "assets/screenshots/4.png",
+                        "sizes": "549x1040",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                },
+                {
+                        "src": "assets/screenshots/5.png",
+                        "sizes": "549x1040",
+                        "type": "image/png",
+                        "form_factor": "narrow"
+                }
+        ],
         "developer": {
                 "name": "Kyle Angelo Galendez",
                 "email": "chessurisme@gmail.com"
