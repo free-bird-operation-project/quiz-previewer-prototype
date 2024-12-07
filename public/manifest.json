@@ -2,6 +2,7 @@
         "name": "Quiz Preview (Prototype)",
         "short_name": "Quiz Preview",
         "description": "Prototype for quiz-manager",
+        "id": "quiz-preview-prototype",
         "start_url": "./index.html",
         "display": "standalone",
         "theme_color": "#ffcc00",
