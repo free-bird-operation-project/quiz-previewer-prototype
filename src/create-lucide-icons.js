@@ -6,11 +6,14 @@ import {
 	createIcons,
 	Download,
 	EllipsisVertical,
+	FileQuestion,
+	FileText,
 	Import,
 	Info,
 	Menu,
 	NotebookText,
 	Play,
+	RefreshCcw,
 	Share,
 	SquareLibrary,
 	Trash2,
@@ -36,7 +39,10 @@ function createLucideIcons() {
 			ArrowLeft,
 			NotebookText,
 			Share,
-			Clipboard
+			Clipboard,
+			FileQuestion,
+			FileText,
+			RefreshCcw
 		}
 	});
 }

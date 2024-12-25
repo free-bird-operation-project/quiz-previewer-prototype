@@ -155,7 +155,6 @@ class Layout {
 				const confirmDelete = confirm(`Are you sure you want to delete ${pack.filename}?`);
 				if (confirmDelete) {
 					await this.quizDatabase.deleteQuizPack(pack.filename);
-					// Refresh the page
 					const main = document.querySelector('main');
 					main.innerHTML = '';
 					const app = await new Layout().render();
@@ -182,6 +181,7 @@ class Layout {
 				const downloadText = document.createElement('p');
 				downloadText.textContent = 'Download';
 				downloadOption.appendChild(downloadText);
+				downloadOption.title = 'Download this quiz pack as JSON';
 				downloadOption.style.cursor = 'pointer';
 				downloadOption.addEventListener('click', () => {
 					const jsonString = JSON.stringify(pack.data, null, 2);
@@ -194,6 +194,44 @@ class Layout {
 					URL.revokeObjectURL(url);
 				});
 
+				const convertToTXTOption = document.createElement('div');
+				const convertIcon = document.createElement('i');
+				convertIcon.dataset.lucide = 'refresh-ccw';
+				convertToTXTOption.appendChild(convertIcon);
+				const convertText = document.createElement('p');
+				convertText.textContent = 'Convert';
+				convertToTXTOption.appendChild(convertText);
+				convertToTXTOption.title = 'Convert this quiz pack to TXT';
+				convertToTXTOption.style.cursor = 'pointer';
+				convertToTXTOption.addEventListener('click', () => {
+					const jsonToTxt = (data) => {
+						return data
+							.map((item) => {
+								return [
+									item.question,
+									`* ${item.choices[0]}`,
+									`- ${item.choices[1]}`,
+									`- ${item.choices[2]}`,
+									`- ${item.choices[3]}`,
+									`${item.references}`,
+									''
+								].join('\n');
+							})
+							.join('\n');
+					};
+
+					const txtContent = jsonToTxt(pack.data);
+
+					const blob = new Blob([txtContent], { type: 'text/plain' });
+					const link = document.createElement('a');
+					link.href = URL.createObjectURL(blob);
+					const fileNameWithoutSuffix = pack.filename.replace(/\.json$/, '');
+					link.download = `${fileNameWithoutSuffix}.txt`;
+					link.click();
+
+					URL.revokeObjectURL(link.href);
+				});
+
 				const deleteOption = document.createElement('div');
 				const trashIcon = document.createElement('i');
 				trashIcon.dataset.lucide = 'trash-2';
@@ -201,6 +239,7 @@ class Layout {
 				const deleteText = document.createElement('p');
 				deleteText.textContent = 'Delete';
 				deleteOption.appendChild(deleteText);
+				deleteOption.title = 'Delete this quiz pack';
 				deleteOption.style.cursor = 'pointer';
 				deleteOption.style.color = 'var(--red-300)';
 				deleteOption.addEventListener('click', async () => {
@@ -217,16 +256,42 @@ class Layout {
 						createLucideIcons();
 					}
 				});
+
+				const divider = document.createElement('hr');
+				divider.className = 'dividerTooltip';
+
+				const questionnaireExtractorOption = document.createElement('div');
+				const fileQuestionIcon = document.createElement('i');
+				fileQuestionIcon.dataset.lucide = 'file-question';
+				questionnaireExtractorOption.appendChild(fileQuestionIcon);
+				const questionnaireExtractorText = document.createElement('p');
+				questionnaireExtractorText.textContent = 'Generate Questionnaire';
+				questionnaireExtractorOption.appendChild(questionnaireExtractorText);
+				questionnaireExtractorOption.style.cursor = 'pointer';
+
+				const questionAnswerExtractorOption = document.createElement('div');
+				const fileTextIcon = document.createElement('i');
+				fileTextIcon.dataset.lucide = 'file-text';
+				questionAnswerExtractorOption.appendChild(fileTextIcon);
+				const questionAnswerExtractorText = document.createElement('p');
+				questionAnswerExtractorText.textContent = 'Extract Q&A';
+				questionAnswerExtractorOption.appendChild(questionAnswerExtractorText);
+				questionAnswerExtractorOption.style.cursor = 'pointer';
+
 				tooltip.appendChild(downloadOption);
+				tooltip.appendChild(convertToTXTOption);
 				tooltip.appendChild(deleteOption);
+				tooltip.appendChild(divider);
+				tooltip.appendChild(questionnaireExtractorOption);
+				tooltip.appendChild(questionAnswerExtractorOption);
 
 				const rect = moreButton.getBoundingClientRect();
 				let left = rect.left;
 				let top = rect.bottom;
 
-				const tooltipWidth = 150;
+				const tooltipWidth = 250;
 				if (left + tooltipWidth > window.innerWidth) {
-					left = window.innerWidth - tooltipWidth - 8;
+					left = window.innerWidth - tooltipWidth;
 				}
 
 				const tooltipHeight = 100;

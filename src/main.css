@@ -582,3 +582,11 @@ button:active {
 		}
 	}
 }
+
+.dividerTooltip {
+	height: 2px;
+	width: 100%;
+	background: var(--grey-500);
+	border: none;
+	margin: 0;
+}
